@@ -1,0 +1,17 @@
+{
+  "name": "expense-tracker-b",
+  "module": "app.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@elysiajs/jwt": "^0.6.4",
+    "@elysiajs/swagger": "^0.6.2",
+    "elysia": "^0.6.23",
+    "mongoose": "^8.0.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.0.8"
+  }
+}
