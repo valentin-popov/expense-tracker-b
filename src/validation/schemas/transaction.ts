@@ -4,9 +4,9 @@ const create = {
 	description: t.String({
 		maxLength: 255
 	}),
-	userId: t.String({
-		minLength: 8,
-		maxLength: 8
+	parentId: t.String({
+		minLength: 36,
+		maxLength: 36
 	}),
 	amount: t.Integer({
 		minimum: 1,

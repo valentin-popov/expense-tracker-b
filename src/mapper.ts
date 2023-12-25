@@ -1,53 +1,46 @@
-
-interface stringKeyValMap {
-	[key:string]: string
-};
-
-interface stringKeyMap {
-	[key: string]: any
-};
-
-const resourceDatabaseMap: {
-	[key:string]: stringKeyValMap
-} = {
+import { TypedResource } from "./database/service";
+const resourceDatabaseMap: Record<string, Record<string, string>> = {
 	'user': {
 		userId: '_id',
 		firstName: 'first_name',
-		lastName: 'last_name',
+		lastName: 'last_name'
 	},
 
 	'transaction': {
 		transactionId: '_id',
-		userId: 'user_id',
+		parentId: 'user_id'
 	}
 };
 
-function mapDatabaseRecord(resource: stringKeyMap, type: string, reverse = false) {
-	if (!(type in resourceDatabaseMap)) {
-		return resource;
-	}
-
-  	let result: stringKeyMap = {};
-	for (const key in resourceDatabaseMap[type]) {
-    	let sourceKey, destinationKey: string;
-        sourceKey = resourceDatabaseMap[type][key];
-		destinationKey = key;
-
-    	if (reverse) {
-        	sourceKey = key;
-        	destinationKey = resourceDatabaseMap[type][key];
-    	}
-
-      	result[destinationKey] = resource[sourceKey];
-	}
+function mapDatabaseRecord(resource: Record<string, string | number>, reverse = false): TypedResource {
 	
-	return result;
-};
+	if (!Object.hasOwn(resource, 'type')) {
+		return resource as { type: string };
+	}
 
-export const mapToDBValue = (resource: object, type: string) => {
-	return mapDatabaseRecord(resource, type, true);
+	const type = (resource as { type: string}).type;
+	const result: TypedResource = { type: type };
+
+	for (const key in resource) {
+		let sourceKey, destinationKey: string;
+		destinationKey = key;
+		sourceKey = resourceDatabaseMap[type][key] ?? key;
+
+		if (reverse) {
+			destinationKey = sourceKey;
+			sourceKey = key;
+		}
+		
+		result[destinationKey] = resource[sourceKey];
+	}
+
+	return result;
 }
 
-export const mapFromDBValue = (dbResult: object, type: string) => {
-	return mapDatabaseRecord(dbResult, type);
+export const mapToDBValue = (resource: TypedResource) => {
+	return mapDatabaseRecord(resource, true);
+}
+
+export const mapFromDBValue = (dbResult: Record<string, string | number>) => {
+	return mapDatabaseRecord(dbResult);
 }

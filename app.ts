@@ -1,11 +1,12 @@
 import Elysia from 'elysia';
 import { Transaction } from './src/validation/schemas/transaction';
-import { transactionController, authController } from './src/controllers';
-import { handleError } from './src/errorHandler';
+import { transactionController } from './src/controllers/transaction';
+import { handleError, errorObject } from './src/errorHandler';
 
 const app = new Elysia();
 app.onError(({ error, set }) => {
-	const errorInfo = handleError(error);
+	const errorInfo = handleError(error as errorObject);
+	
 	set.status = errorInfo.httpStatus;
 	return errorInfo.errorObject;
 }).group('/v1', app => 

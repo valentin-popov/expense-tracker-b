@@ -1,4 +1,3 @@
-import { ElysiaInstance } from 'elysia';
 import { fields } from './validation/schemas/transaction';
 
 const errorTypes = {
@@ -27,21 +26,24 @@ function extractErrorField(errorMessage: string): string {
 	return errorField;
 }
 
-export const handleError = (
-	error: ElysiaInstance['error']
-): {
+export type errorObject = {
+	code: string,
+	message: string
+}
+
+export const handleError = (error: errorObject): {
 	httpStatus: number,
 	errorObject: {
 		error: string
 	}
 } => {
-	const errorObj = error as any;
+	const errorObj = error as {code: string, message: string};
 	let httpStatus: number, errorMessage: string;
-
+	let errorField: string;
 	switch (errorObj.code) {
 		case errorTypes.validation:
 			httpStatus = 400;
-			const errorField = extractErrorField((error as {message: string}).message);
+			errorField = extractErrorField((error as {message: string}).message);
 			errorMessage = errorField ? `Invalid field: ${errorField}` : GENERIC_VALIDATION_MESSAGE;
 			break;
 		case errorTypes.parse:
@@ -66,4 +68,3 @@ export const handleError = (
 		}
 	}
 };
-

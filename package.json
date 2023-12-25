@@ -9,9 +9,13 @@
     "@elysiajs/jwt": "^0.6.4",
     "@elysiajs/swagger": "^0.6.2",
     "elysia": "^0.6.23",
-    "mongoose": "^8.0.0"
+    "mongoose": "^8.0.0",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
-    "bun-types": "^1.0.8"
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
+    "bun-types": "^1.0.8",
+    "eslint": "^8.56.0"
   }
 }
