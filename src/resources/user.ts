@@ -15,5 +15,5 @@ export const build = (user: UserInput): User => {
 		...user,
 		userId: crypto.randomUUID(),
 		type: 'user'
-	}
-}
+	};
+};

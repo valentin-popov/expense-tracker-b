@@ -5,7 +5,7 @@ const errorTypes = {
 	parse: 'PARSE',
 	notFound: 'NOT_FOUND',
 	internal: 'INTERNAL_SERVER_ERROR'
-}
+};
 
 const GENERIC_VALIDATION_MESSAGE = 'One or more fields are invalid';
 function extractErrorField(errorMessage: string): string {
@@ -41,24 +41,24 @@ export const handleError = (error: errorObject): {
 	let httpStatus: number, errorMessage: string;
 	let errorField: string;
 	switch (errorObj.code) {
-		case errorTypes.validation:
-			httpStatus = 400;
-			errorField = extractErrorField((error as {message: string}).message);
-			errorMessage = errorField ? `Invalid field: ${errorField}` : GENERIC_VALIDATION_MESSAGE;
-			break;
-		case errorTypes.parse:
-			httpStatus = 400;
-			errorMessage = 'Bad Request'
-			break;
-		case errorTypes.notFound:
-			httpStatus = 404;
-			errorMessage = 'Not found';
-			break;
-		case errorTypes.internal:
-		default:
-			httpStatus = 500;
-			errorMessage = 'Internal Server Error';
-			break;
+	case errorTypes.validation:
+		httpStatus = 400;
+		errorField = extractErrorField((error as {message: string}).message);
+		errorMessage = errorField ? `Invalid field: ${errorField}` : GENERIC_VALIDATION_MESSAGE;
+		break;
+	case errorTypes.parse:
+		httpStatus = 400;
+		errorMessage = 'Bad Request';
+		break;
+	case errorTypes.notFound:
+		httpStatus = 404;
+		errorMessage = 'Not found';
+		break;
+	case errorTypes.internal:
+	default:
+		httpStatus = 500;
+		errorMessage = 'Internal Server Error';
+		break;
 	}
 	
 	return {
@@ -66,5 +66,5 @@ export const handleError = (error: errorObject): {
 		errorObject: {
 			error: errorMessage
 		}
-	}
+	};
 };
