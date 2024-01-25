@@ -19,7 +19,6 @@ app.onError(({ error, set }) => {
 			// beforeHandle: authController.isSignedIn,
 			body: TransactionSchema
 		}
-	// ).get('/transactions', ({ request }) => transactionController.read(request.url), {
 	).get('/transactions', ({ query }) => {
 		return transactionController.read(query);
 	}, {

@@ -64,5 +64,4 @@ export const mapFromDocument = (transactionDoc: Record<string, string | number>)
 		description: transaction.description as string,
 		parentId: transaction.parentId as string,
 	};
-	// return res
 };

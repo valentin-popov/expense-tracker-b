@@ -1,16 +1,15 @@
-import { actualPrimitives } from 'mongoose';
 import { Filter, filterOp, globallyExcludedFields } from '../common';
 import { Transaction } from '../models';
 
 export default {
 	// readById: (id: string) => {},
 	read: async (filters: Array<Filter>) => {
-		const queryFilter: Record<string, object | actualPrimitives | Array<actualPrimitives>> = {};
+		const queryFilter:Record<string, any> = {};
 		for (const filter of filters) {
 			if (!Object.values(filterOp).includes(filter.operation)) {
 				continue;
 			}
-			// todo: filters are overwritten. add arrays.
+			
 			switch (filter.operation) {
 			case filterOp.EQUALS:
 			case filterOp.IN_ARRAY:
@@ -18,14 +17,10 @@ export default {
 				queryFilter[filter.name] = filter.value;
 				break;
 			case filterOp.GREATER_THAN:
-				queryFilter[filter.name] = {
-					$gt: filter.value
-				};
+				queryFilter[filter.name]['$gt'] = filter.value;
 				break;
 			case filterOp.LOWER_THAN:
-				queryFilter[filter.name] = {
-					$lt: filter.value
-				};
+				queryFilter[filter.name]['$lt'] = filter.value;
 				break;
 			default:
 				break;
