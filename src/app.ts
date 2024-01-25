@@ -6,6 +6,9 @@ import { buildQuery as buildTransactionReadQuery} from './resources/transaction'
 import { queryNeedsParsing } from './utils';
 
 const app = new Elysia();
+const v1routes = {
+	transaction: "/transactions"
+};
 app.onError(({ error, set }) => {
 	const errorInfo = handleError(error as errorObject);
 	
@@ -15,11 +18,11 @@ app.onError(({ error, set }) => {
 	app.get('/', () => ({msg: 'Hello world'})
 
 	).post(
-		'/transactions', ({ body }) => transactionController.create(body), {
+		v1routes.transaction, ({ body }) => transactionController.create(body), {
 			// beforeHandle: authController.isSignedIn,
 			body: TransactionSchema
 		}
-	).get('/transactions', ({ query }) => {
+	).get(v1routes.transaction, ({ query }) => {
 		return transactionController.read(query);
 	}, {
 		transform: (params) => {
