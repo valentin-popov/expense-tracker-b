@@ -55,6 +55,7 @@ export const mapToDocument = (transaction: Transaction): Record<string, string |
 };
 
 export const mapFromDocument = (transactionDoc: Record<string, string | number>): Transaction => {
+	transactionDoc.type = 'transaction';
 	const transaction = mapFromDBValue(transactionDoc);
 
 	return {

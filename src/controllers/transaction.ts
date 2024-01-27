@@ -55,11 +55,7 @@ export default {
 		const transactions: Array<Transaction> = [];
 		const readResult = await transactionService.read(filter);
 		readResult.forEach(res => {
-			const resource = {
-				type: 'transaction',
-				...res
-			};
-			transactions.push(mapFromDocument(resource));
+			transactions.push(mapFromDocument(res));
 		});
 		return transactions;
 	}

@@ -1,10 +1,11 @@
 import { fields } from './validation/schemas/transaction';
 
-const errorTypes = {
+export const errorTypes = {
 	validation: 'VALIDATION',
 	parse: 'PARSE',
 	notFound: 'NOT_FOUND',
-	internal: 'INTERNAL_SERVER_ERROR'
+	internal: 'INTERNAL_SERVER_ERROR',
+	unauthorized: 'UNAUTHORIZED'
 };
 
 const GENERIC_VALIDATION_MESSAGE = 'One or more fields are invalid';
@@ -37,13 +38,12 @@ export const handleError = (error: errorObject): {
 		error: string
 	}
 } => {
-	const errorObj = error as {code: string, message: string};
 	let httpStatus: number, errorMessage: string;
 	let errorField: string;
-	switch (errorObj.code) {
+	switch (error.code) {
 	case errorTypes.validation:
 		httpStatus = 400;
-		errorField = extractErrorField((error as {message: string}).message);
+		errorField = extractErrorField(error.message);
 		errorMessage = errorField ? `Invalid field: ${errorField}` : GENERIC_VALIDATION_MESSAGE;
 		break;
 	case errorTypes.parse:
@@ -53,6 +53,11 @@ export const handleError = (error: errorObject): {
 	case errorTypes.notFound:
 		httpStatus = 404;
 		errorMessage = 'Not found';
+		break;
+
+	case errorTypes.unauthorized:
+		httpStatus = 401;
+		errorMessage = error.message;
 		break;
 	case errorTypes.internal:
 	default:
