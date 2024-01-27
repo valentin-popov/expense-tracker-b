@@ -50,13 +50,16 @@ export const mapToDocument = (transaction: Transaction): Record<string, string |
 		amount: transaction.amount,
 		category: transaction.category,
 		description: transaction.description,
-		parentId: transaction.parentId
+		parentId: transaction.parentId,
+		type: 'transaction'
 	});
 };
 
 export const mapFromDocument = (transactionDoc: Record<string, string | number>): Transaction => {
-	transactionDoc.type = 'transaction';
-	const transaction = mapFromDBValue(transactionDoc);
+	const transaction = mapFromDBValue({
+		...transactionDoc,
+		type: 'transaction'
+	});
 
 	return {
 		transactionId: transaction.transactionId as string,

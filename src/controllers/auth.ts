@@ -9,7 +9,6 @@ type Credentials = {
 }
 
 const ERR_INV_CRED = 'Invalid credentials';
-const ERR_INV_AUTH_HEAD = 'Invalid authorization header';
 const ERR_INV_TOKEN = 'Invalid or expired authorization token';
 
 
@@ -29,7 +28,7 @@ export default {
 	},
 	isAuthorized: (authHeader: string | null) => {
 		const authError = {
-			message: ERR_INV_AUTH_HEAD,
+			message: ERR_INV_TOKEN,
 			code: errorTypes.unauthorized
 		};
 
@@ -41,14 +40,11 @@ export default {
 		if (headerValues.length < 2 || headerValues[0] !== 'Bearer') {
 			throw authError;
 		}
-		
+
 		try {
 			return verifyJWT(headerValues[1]);
 		} catch(exc) {
-			throw {
-				message: ERR_INV_TOKEN,
-				code: errorTypes.unauthorized
-			}		
+			throw authError;	
 		}
 	}
 }

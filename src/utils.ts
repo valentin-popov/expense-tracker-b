@@ -41,7 +41,7 @@ export const generateJWT = (obj: object): string  => {
 	return signJWT({
 		...obj,
 	}, process.env.JWT_SECRET, {
-		expiresIn: '1m'
+		expiresIn: '1h'
 	});
 }
 
