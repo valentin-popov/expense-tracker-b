@@ -1,10 +1,11 @@
-import { Schema } from 'mongoose';
-import { mongoose as dbConnection } from '../database/service';
+import { mongoose as dbConnection } from '../database/common';
 
 const userSchema = new dbConnection.Schema({
 	_id: {
-		type: Schema.Types.UUID,
-		required: true
+		type: String,
+		minLength: 36,
+		maxLength: 36,
+		required: true,
 	},
 	username: {
 		type: String,
@@ -34,8 +35,10 @@ const userSchema = new dbConnection.Schema({
 
 const transactionSchema = new dbConnection.Schema({
 	_id: {
-		type: Schema.Types.UUID,
-		required: true
+		type: String,
+		minLength: 36,
+		maxLength: 36,
+		required: true,
 	},
 	description: {
 		type: String,
@@ -43,8 +46,10 @@ const transactionSchema = new dbConnection.Schema({
 		required: true
 	},
 	user_id: {
-		type: Schema.Types.UUID,
-		required: true
+		type: String,
+		minLength: 36,
+		maxLength: 36,
+		required: true,
 	},
 	amount: {
 		type: Number,
