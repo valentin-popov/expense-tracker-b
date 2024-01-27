@@ -1,7 +1,7 @@
 import userService from '../database/service/user';
 import { errorTypes } from '../errorHandler';
 import { mapFromDocument } from '../resources/user';
-import { generateJWT, verifyJWT, hashPassword } from '../utils'
+import { generateJWT, verifyJWT, hashPassword } from '../utils';
 
 type Credentials = {
 	username: string,
@@ -19,7 +19,7 @@ export default {
 			throw {
 				message: ERR_INV_CRED,
 				code: errorTypes.unauthorized
-			}
+			};
 		}
 		const user = mapFromDocument(dbUser);
 		return generateJWT({
@@ -47,4 +47,4 @@ export default {
 			throw authError;	
 		}
 	}
-}
+};

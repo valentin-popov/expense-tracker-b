@@ -35,7 +35,7 @@ export const flipObject = (obj: Record<string, string>): Record<string, string> 
 
 export const hashPassword = (password: string): string => {
 	return createHash('sha256').update(password).digest('hex');
-}
+};
 
 export const generateJWT = (obj: object): string  => {
 	return signJWT({
@@ -43,11 +43,11 @@ export const generateJWT = (obj: object): string  => {
 	}, process.env.JWT_SECRET, {
 		expiresIn: '1h'
 	});
-}
+};
 
 export const verifyJWT = (jwt: string): object => {
-	return verify(jwt, process.env.JWT_SECRET)
-}
+	return verify(jwt, process.env.JWT_SECRET);
+};
 
 function setNumericValues(obj: Record<string, any>): Record<string, any> {
 	

@@ -9,7 +9,7 @@ import { queryNeedsParsing } from './utils';
 
 const app = new Elysia();
 const v1routes = {
-	transaction: "/transactions",
+	transaction: '/transactions',
 	login: '/login'
 };
 app.onError(({ error, set }) => {
@@ -19,15 +19,15 @@ app.onError(({ error, set }) => {
 	return errorInfo.errorObject;
 }).group('/v1', app => 
 	app.get('/', () => {
-		return "hello world";
+		return 'hello world';
 	}).post(v1routes.login, ({ body }) => {
-		return authController.createToken(body)
+		return authController.createToken(body);
 	}, {
 		body: Credentials
 	}).post(
 		v1routes.transaction, ({ body }) => transactionController.create(body), {
 			beforeHandle: ({ request }) => {
-				authController.isAuthorized(request.headers.get('Authorization'))
+				authController.isAuthorized(request.headers.get('Authorization'));
 			},
 			body: TransactionSchema
 		}
@@ -41,7 +41,7 @@ app.onError(({ error, set }) => {
 			}
 		},
 		beforeHandle: ({ request }) => {
-			authController.isAuthorized(request.headers.get('Authorization'))
+			authController.isAuthorized(request.headers.get('Authorization'));
 		},
 		query: TransactionRead
 	})
