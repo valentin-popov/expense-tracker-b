@@ -32,12 +32,16 @@ app.onError(({ error, set }) => {
 			body: TransactionSchema
 		}
 	).get(v1routes.transaction, ({ query }) => {
+		// todo: parentId must be equal to requester user id.
 		return transactionController.read(query);
 	}, {
 		transform: (params) => {
 			if (queryNeedsParsing(params.request.url)) {
 				params.query = buildTransactionReadQuery(params.request.url);
 			}
+		},
+		beforeHandle: ({ request }) => {
+			authController.isAuthorized(request.headers.get('Authorization'))
 		},
 		query: TransactionRead
 	})
