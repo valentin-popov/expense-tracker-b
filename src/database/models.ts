@@ -10,7 +10,13 @@ const userSchema = new dbConnection.Schema({
 	username: {
 		type: String,
 		minLength: 3,
-		maxLength: 64,
+		maxLength: 24,
+		required: true
+	},
+	password: {
+		type: String,
+		minLength: 3,
+		maxLength: 24,
 		required: true
 	},
 	email: {
