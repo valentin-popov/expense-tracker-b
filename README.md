@@ -1,7 +1,5 @@
 # Expense Tracker - Backend
-<img src="https://media.licdn.com/dms/image/D5622AQEuDkiryYvgsw/feedshare-shrink_800/0/1697783942283?e=2147483647&v=beta&t=Up1TzSPS5IjG3Tg4m8oC4tw0_3t-ijy_9vmvIHMSeG8" width="100" height="28"> 
-<img src="https://img.shields.io/badge/Bun.js-FFF?style=for-the-badge&logo=bun&logoColor=black" width="100" height="28">
-<img src="https://img.shields.io/badge/MongoDB-FFF.svg?style=for-the-badge&logo=mongodb&logoColor=green" width="100" height="28">
+<img src="https://media.licdn.com/dms/image/D5622AQEuDkiryYvgsw/feedshare-shrink_800/0/1697783942283?e=2147483647&v=beta&t=Up1TzSPS5IjG3Tg4m8oC4tw0_3t-ijy_9vmvIHMSeG8" width="100" height="28"> <img src="https://img.shields.io/badge/Bun.js-FFF?style=for-the-badge&logo=bun&logoColor=black" width="100" height="28"> <img src="https://img.shields.io/badge/MongoDB-FFF.svg?style=for-the-badge&logo=mongodb&logoColor=green" width="100" height="28">
 
 ## Prerequisites
 Before you can run this application, you will need to have the following installed on your machine:
