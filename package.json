@@ -18,5 +18,9 @@
     "@typescript-eslint/parser": "latest",
     "bun-types": "latest",
     "eslint": "^8.56.0"
+  },
+  "scripts": {
+    "lint": "npx eslint src",
+    "lint:fix": "bun run lint --fix"
   }
 }

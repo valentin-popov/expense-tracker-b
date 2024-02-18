@@ -15,8 +15,8 @@ const userSchema = new dbConnection.Schema({
 	},
 	password: {
 		type: String,
-		minLength: 3,
-		maxLength: 24,
+		minLength: 64,
+		maxLength: 64,
 		required: true
 	},
 	email: {
