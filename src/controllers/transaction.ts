@@ -1,5 +1,5 @@
 import { 
-	build as buildTransaction, 
+	build, 
 	ReadQuery, 
 	TransactionInput, 
 	Transaction ,
@@ -11,7 +11,7 @@ import { Filter } from '../database/common';
 
 export default {
 	create: async function(params: TransactionInput) {
-		const transaction = buildTransaction(params);
+		const transaction = build(params);
 		
 		await transactionService.bulkInsert([mapToDocument({
 			transactionId: transaction.transactionId,

@@ -26,7 +26,7 @@ export default {
 			userId: user.userId
 		});
 	},
-	isAuthorized: (authHeader: string | null) => {
+	verifyToken: (authHeader: string | null) => {
 		const authError = {
 			message: ERR_INV_TOKEN,
 			code: errorTypes.unauthorized
